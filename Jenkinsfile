@@ -20,18 +20,10 @@ stages {
 //   }
 
     stage('Build des images') {
-        environment {
-            APP_FOLDER = ''
-        }
         steps {
             script {
-            env.APP_FOLDER = './movie-service'
-            env.APP_REGITRY = env.DOCKER_IMAGE_MOVIE
-            sh 'docker build -t $DOCKER_ID/$APP_REGITRY:$DOCKER_TAG $APP_FOLDER'
-
-            env.APP_FOLDER = './cast-service'
-            env.APP_REGITRY = env.DOCKER_IMAGE_CAST
-            sh 'docker build -t $DOCKER_ID/$APP_REGITRY:$DOCKER_TAG $APP_FOLDER'
+            sh 'docker build -t $DOCKER_ID/$DOCKER_IMAGE_MOVIE:$DOCKER_TAG ./movie-service'
+            sh 'docker build -t $DOCKER_ID/$DOCKER_IMAGE_CAST:$DOCKER_TAG ./cast-service'
             }
         }
     }
