@@ -19,14 +19,17 @@ stages {
 //   }
 
     stage('Build Movie Service') {
+        environment {
+            APP_FOLDER = './movie-service'
+        }
         steps {
             script {
             sh '''
-                docker build -t $DOCKER_ID/$DOCKER_IMAGE:$DOCKER_TAG ./movie-service
+                docker build -t $DOCKER_ID/$DOCKER_IMAGE:$DOCKER_TAG $APP_FOLDER
             ''' 
+            }
         }
     }
-
 
 //   stage('Docker run'){ // run container from our builded image
 //     steps {
@@ -122,7 +125,7 @@ stages {
 //           '''
 //         }
 //       }
-     }
+    //  }
   }
 }
 
