@@ -18,14 +18,14 @@ stages {
 //     }
 //   }
 
-stage('Build Movie Service') {
-    steps {
-        script {
-        sh '''
-            docker build -t $DOCKER_ID/$DOCKER_IMAGE:$DOCKER_TAG ./movie-service
-           ''' 
+    stage('Build Movie Service') {
+        steps {
+            script {
+            sh '''
+                docker build -t $DOCKER_ID/$DOCKER_IMAGE:$DOCKER_TAG ./movie-service
+            ''' 
+        }
     }
-}
 
 
 //   stage('Docker run'){ // run container from our builded image
