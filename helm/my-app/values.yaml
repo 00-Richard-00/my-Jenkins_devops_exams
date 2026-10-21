@@ -1,0 +1,34 @@
+nginx:
+  image:
+    repository: nginx
+    tag: "1.28"
+  service:
+    port: 8080
+
+movie:
+  image:
+    repository: 0jr0/exam-jenkins-movie
+    tag: "latest"
+  service:
+    port: 8000
+
+cast:
+  image:
+    repository: 0jr0/exam-jenkins-cast
+    tag: "latest"
+  service:
+    port: 8000
+
+postgres:
+  image: postgres:12.1-alpine
+  storage: 1Gi
+
+movieDb:
+  database: movie_db_dev
+  username: movie_db_username
+  password: movie_db_password
+
+castDb:
+  database: cast_db_dev
+  username: cast_db_username
+  password: cast_db_password
