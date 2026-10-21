@@ -1,7 +1,8 @@
 pipeline {
 environment { // Declaration of environment variables
 DOCKER_ID = "0jr0" // replace this with your docker-id
-DOCKER_IMAGE = "exam-jenkins"
+DOCKER_IMAGE_MOVIE = "exam-jenkins-movie"
+DOCKER_IMAGE_CAST = "exam-jenkins-cast"
 DOCKER_TAG = "v.${BUILD_ID}.0" // we will tag our images with the current build in order to increment the value by 1 with each new build
 }
 agent any // Jenkins will be able to select all available agents
@@ -18,15 +19,19 @@ stages {
 //     }
 //   }
 
-    stage('Build Movie Service') {
+    stage('Build des images') {
         environment {
-            APP_FOLDER = './movie-service'
+            APP_FOLDER = ''
         }
         steps {
             script {
-            sh '''
-                docker build -t $DOCKER_ID/$DOCKER_IMAGE:$DOCKER_TAG $APP_FOLDER
-            ''' 
+            env.APP_FOLDER = './movie-service'
+            env.APP_REGITRY = env.DOCKER_IMAGE_MOVIE
+            sh 'docker build -t $DOCKER_ID/$APP_REGITRY:$DOCKER_TAG $APP_FOLDER'
+
+            env.APP_FOLDER = './cast-service'
+            env.APP_REGITRY = env.DOCKER_IMAGE_CAST
+            sh 'docker build -t $DOCKER_ID/$APP_REGITRY:$DOCKER_TAG $APP_FOLDER'
             }
         }
     }
