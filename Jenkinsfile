@@ -72,7 +72,7 @@ stage('Debug branche') {
     stage('Approbation PROD') {
         when {
             expression {
-                env.BRANCH_NAME == 'master'
+                return env.GIT_BRANCH == 'origin/master'
             }
         }
         steps {
@@ -89,7 +89,7 @@ stage('Debug branche') {
     stage('Deploy PROD') {
         when {
             expression {
-                env.BRANCH_NAME == 'master'
+                return env.GIT_BRANCH == 'origin/master'
             }
         }
         steps {
