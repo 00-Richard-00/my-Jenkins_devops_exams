@@ -13,6 +13,14 @@ environment {
 
 stages {
 
+stage('Debug branche') {
+    steps {
+        echo "BRANCH_NAME = '${env.BRANCH_NAME}'"
+        echo "GIT_BRANCH  = '${env.GIT_BRANCH}'"
+        echo "GIT_LOCAL_BRANCH = '${env.GIT_LOCAL_BRANCH}'"
+    }
+}
+
     stage('Build des images Movie et Cast') {
         steps {
             sh '''
